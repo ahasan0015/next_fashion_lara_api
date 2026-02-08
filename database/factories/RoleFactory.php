@@ -19,7 +19,8 @@ class RoleFactory extends Factory
         
 
         return [
-            'name' => $this->faker->unique()->randomElement(), // ✅ correct
+            'name' => fake()->word(),
         ];
+
     }
 }

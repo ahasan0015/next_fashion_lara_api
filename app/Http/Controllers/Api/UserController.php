@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -12,7 +13,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+       $user = User::paginate(10);
+        // $roles = Role::all();
+        return view('admin.pages.users.index', compact('user'));
     }
 
     /**
@@ -28,7 +31,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.pages.users.show', compact('user'));
     }
 
     /**

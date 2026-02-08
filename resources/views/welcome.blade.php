@@ -1,1 +1,21 @@
-<h1>Next Fashion api is Running............</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Fashion</title>
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light d-flex flex-column justify-content-center align-items-center vh-100">
+
+  <div class="text-center">
+    <h1 class="mb-4">Welcome to Next Fashion</h1>
+    <a href="#" class="btn btn-primary me-2">Login</a>
+    <a href="#" class="btn btn-success">Register</a>
+  </div>
+
+  <!-- Bootstrap JS CDN (Optional for components) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
