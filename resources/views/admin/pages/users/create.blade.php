@@ -23,38 +23,59 @@
                     User Information
                 </div>
 
-                <form>
+                <form action="{{ route('users.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
 
                     <div class="card-body">
 
                         <!-- Name -->
                         <div class="mb-3">
                             <label class="form-label fw-bold">Full Name</label>
-                            <input type="text" class="form-control" placeholder="Enter full name">
+                            <input type="text" name="name" class="form-control" placeholder="Enter full name" value="{{ old('name') }}">
+                            @error('name')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- Email -->
                         <div class="mb-3">
                             <label class="form-label fw-bold">Email</label>
-                            <input type="email" class="form-control" placeholder="Enter email address">
+                            <input type="email" name="email" class="form-control" placeholder="Enter email address" value="{{ old('email') }}">
                         </div>
+                        @error('email')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
 
                         <!-- Phone -->
                         <div class="mb-3">
                             <label class="form-label fw-bold">Phone</label>
-                            <input type="text" class="form-control" placeholder="Enter phone number">
+                            <input type="text" name="phone" class="form-control" placeholder="Enter phone number" value="{{ old('phone') }}">
                         </div>
+                        @error('phone')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
 
                         <!-- Password -->
                         <div class="mb-3">
                             <label class="form-label fw-bold">Password</label>
-                            <input type="password" class="form-control" placeholder="Enter password">
+                            <input type="password" name="password" class="form-control" placeholder="Enter password">
                         </div>
+                        @error('password')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                        <!-- Confirm Password -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold"> Confirm Password</label>
+                            <input type="password" name="password_confirmation" class="form-control" placeholder="Enter password">
+                        </div>
+                        @error('password')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
 
                         <!-- Role -->
                         <div class="mb-3">
                             <label class="form-label fw-bold">Role</label>
-                            <select class="form-select">
+                            <select name="role_id" class="form-select">
                                 @foreach ($roles as $item)
                                 <option value="{{ $item['id'] }}">{{$item['name']}}</option>
                                 @endforeach
@@ -62,14 +83,14 @@
                         </div>
 
                         <!-- Status -->
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label class="form-label fw-bold">Status</label>
                             <select class="form-select">
                                 <option selected disabled>Select status</option>
                                 <option>Active</option>
                                 <option>Inactive</option>
                             </select>
-                        </div>
+                        </div> -->
 
                     </div>
 
