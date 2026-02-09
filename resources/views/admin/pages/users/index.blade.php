@@ -10,8 +10,13 @@
     <!-- Page Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3 class="fw-bold">Users Management</h3>
-        <a href="#" class="btn btn-primary">+ Add User</a>
+        <a href="{{ route('users.create') }}" class="btn btn-primary">+ Add User</a>
     </div>
+    @if(session('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+   @endif
 
     <!-- Users Table -->
     <div class="card shadow-sm border-0">
@@ -47,8 +52,12 @@
                         <td><span class="badge bg-success">Active</span></td>
                         <td class="d-flex gap-2">
                             <a href="{{ route('users.show',$item['id']) }}" class="btn btn-sm btn-primary">View</a>
-                            <a href="#" class="btn btn-sm btn-info">Edit</a>
-                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            <a href="#" class="btn btn-sm btn-info">Edit</a>                            
+                            <form action="{{ route('users.destroy', $item['id']) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
                         </td>
                     </tr>
 

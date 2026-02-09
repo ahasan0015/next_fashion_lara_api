@@ -87,7 +87,11 @@
 
                 <div class="card-footer bg-white text-end">
 
-                    <a href="#" class="btn btn-danger">Delete User</a>
+                    <form action="{{ route('users.destroy', $user['id']) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">Delete User</button>
+                            </form>
 
                 </div>
 
