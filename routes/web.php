@@ -17,9 +17,12 @@ Route::get('/users/create', [UserController::class,'create'])->name('users.creat
 Route::post('/users', [UserController::class,'store'])->name('users.store');
 
 // Route::get('/users/{id}', [UserController::class,'show'])->name('users.show');
-Route::get('/users/{id}', [UserController::class,'show'])->name('users.show');
+Route::get('/users/{user}', [UserController::class,'show'])->name('users.show');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-// Route::get('/users/id', [UserController::class,'show']);
-// Route::get('/users/{id}', 'show')->name('users.show');
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
 
-
+//Product
+Route::get('/product', function () {
+    return view('admin.pages.products.index');
+});

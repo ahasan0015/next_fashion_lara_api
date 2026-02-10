@@ -46,8 +46,9 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        // $user->password = Hash::make($request->password);
+        $user->phone = $request->phone;
+        // $user->password = bcrypt($request->password);
+        $user->password = Hash::make($request->password);
         $user->role_id = $request->role_id;
         $user->save();
 
@@ -68,7 +69,23 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // dd($request->all());
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'phone' => ['required','regex:/^(01)[0-9]{9}$/'],
+        ]);
+
+        // dd($request->all());
+        $user = User::find($id);
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'role_id' => $request->role_id
+        ]);
+        return redirect()->route('users.index', ['page' => $request->page])->with('success', 'User info updated successfully!');
     }
 
     /**
@@ -79,5 +96,15 @@ class UserController extends Controller
         User::destroy($id);
         // dd('deleted');
         return redirect()->route('users.index')->with('success', 'User deleted successfully!');
+    }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+        $roles = Role::all();
+        // dd($user);
+        $page = request('page', 1);
+        // dd($page);
+        return view('admin.pages.users.edit', compact('roles', 'user', 'page'));
     }
 }

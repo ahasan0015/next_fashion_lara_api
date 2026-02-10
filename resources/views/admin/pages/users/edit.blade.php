@@ -11,7 +11,6 @@
         <h3 class="fw-bold">Edit User</h3>
 
         <div>
-            <a href="{{ route('users.show', $user['id']) }}" class="btn btn-info">View</a>
             <a href="{{ route('users.index') }}" class="btn btn-secondary">Back</a>
         </div>
     </div>
@@ -28,46 +27,56 @@
 
                 <form action="{{ route('users.update', $user['id']) }}" method="POST">
                     @csrf
-                    @method('PUT')
-
+                    @method('PATCH')
+                    <input type="hidden" name="page" value="{{ $page }}">
                     <div class="card-body">
 
                         <!-- Name -->
                         <div class="mb-3">
                             <label class="form-label fw-bold">Full Name</label>
-                            <input type="text" name="name" class="form-control"
-                                value="{{ old('name', $user['name']) }}" required>
+                            <input type="text" name="name" class="form-control" value="{{ old('name') ?? $user['name'] }}">
                         </div>
+                        @error('name')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
 
                         <!-- Email -->
                         <div class="mb-3">
                             <label class="form-label fw-bold">Email</label>
-                            <input type="email" name="email" class="form-control"
-                                value="{{ old('email', $user['email']) }}" required>
+                            <input type="email" name="email" class="form-control" value="{{ old('email') ?? $user['email'] }}">
                         </div>
-
+                        @error('email')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                         <!-- Phone -->
                         <div class="mb-3">
                             <label class="form-label fw-bold">Phone</label>
-                            <input type="text" name="phone" class="form-control"
-                                value="{{ old('phone', $user['phone']) }}">
+                            <input type="text" name="phone" class="form-control" value="{{ old(key: 'phone') ?? $user['phone'] }}">
                         </div>
+                        @error('phone')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
 
                         <!-- Role -->
                         <div class="mb-3">
                             <label class="form-label fw-bold">Role</label>
-                            <select name="role" class="form-select">
-                                <option value="admin" {{ $user['role'] == 'admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="user" {{ $user['role'] == 'user' ? 'selected' : '' }}>User</option>
+                            <select name="role_id" class="form-select">
+                                @php
+                                $selected = old('role_id') ?? $user['role_id'];
+                                @endphp
+                                @foreach ($roles as $item )
+                                <option value="{{ $item['id'] }}" @selected($selected==$item['id'])>{{ $item['name'] }}</option>
+                                @endforeach
+
                             </select>
                         </div>
 
                         <!-- Status -->
                         <div class="mb-3">
                             <label class="form-label fw-bold">Status</label>
-                            <select name="status" class="form-select">
-                                <option value="1" {{ $user['status'] == 1 ? 'selected' : '' }}>Active</option>
-                                <option value="0" {{ $user['status'] == 0 ? 'selected' : '' }}>Inactive</option>
+                            <select class="form-select">
+                                <option selected>Active</option>
+                                <option>Inactive</option>
                             </select>
                         </div>
 
@@ -75,9 +84,7 @@
 
                     <div class="card-footer bg-white text-end">
 
-                        <button type="submit" class="btn btn-primary">
-                            Update User
-                        </button>
+                        <input type="submit" value="Update" class="btn btn-success">
 
                     </div>
 

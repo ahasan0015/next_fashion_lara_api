@@ -52,7 +52,7 @@
                         <td><span class="badge bg-success">Active</span></td>
                         <td class="d-flex gap-2">
                             <a href="{{ route('users.show',$item['id']) }}" class="btn btn-sm btn-primary">View</a>
-                            <a href="#" class="btn btn-sm btn-info">Edit</a>                            
+                            <a href="{{ route('users.edit', ['user' => $item['id'], 'page' => request('page', 1)]) }}" class="btn btn-sm btn-info">Edit</a>                            
                             <form action="{{ route('users.destroy', $item['id']) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('delete')
