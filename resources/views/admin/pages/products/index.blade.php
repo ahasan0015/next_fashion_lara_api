@@ -36,38 +36,33 @@
 
                 <tbody>
                     <!-- Static Example Rows -->
+                    @foreach ($products as $i => $item)
                     <tr>
-                        <td>1</td>
-                        <td>Product A</td>
-                        <td>product-a</td>
-                        <td>Electronics</td>
-                        <td>Brand X</td>
-                        <td>Active</td>
-                        <td>$150.00</td>
+                        <td>{{ $item['id'] }}</td>
+                        <td>{{ $item['name'] }}</td>
+                        <td>{{ $item['name'] }}</td>
+                        <td>{{ $item['name'] }}</td>
+                        <td>{{ $item['slug'] }}</td>
+                        <td>{{ $item['description'] }}</td>
+                        <td>{{ $item['base_price'] }}</td>
                         <td>2026-02-10 12:00:00</td>
-                        <td>
+                        <td class="d-flex gap-2">
                             <a href="#" class="btn btn-sm btn-info">View</a>
                             <a href="#" class="btn btn-sm btn-warning">Edit</a>
                             <a href="#" class="btn btn-sm btn-danger">Delete</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Product B</td>
-                        <td>product-b</td>
-                        <td>Clothing</td>
-                        <td>Brand Y</td>
-                        <td>Inactive</td>
-                        <td>$75.00</td>
-                        <td>2026-02-09 15:30:00</td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-info">View</a>
-                            <a href="#" class="btn btn-sm btn-warning">Edit</a>
-                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                        </td>
-                    </tr>
+
+                    @endforeach
                     <!-- Add more static rows as needed -->
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="9">
+                            {{ $products->links('vendor.pagination.bootstrap-5') }}
+                        </th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
 

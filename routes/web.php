@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
@@ -23,6 +24,7 @@ Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.e
 Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
 
 //Product
-Route::get('/product', function () {
-    return view('admin.pages.products.index');
-});
+// Route::get('/product', function () {
+//     return view('admin.pages.products.index');
+// });
+Route::get('/products', [ProductController::class,'index'])->name('products.index');

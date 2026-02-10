@@ -88,7 +88,7 @@
         <ul class="nav flex-column mt-3">
           <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('users.index') }}">Users</a></li>
-          <li class="nav-item"><a class="nav-link" href="/product">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('products.index') }}">Products</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Orders</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
         </ul>
